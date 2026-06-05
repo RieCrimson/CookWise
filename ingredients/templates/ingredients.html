@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home Kitchen Management System</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      /* Combined background properties into a clean shorthand */
+      background: url('https://i.pinimg.com/1200x/a5/0a/69/a50a6990e07b1cc241950b1c9967ad19.jpg') center / cover no-repeat fixed;
+      padding: 40px 20px;
+      position: relative;
+      box-sizing: border-box; /* Prevents padding from adding to the 100vh height */
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(2px);
+      z-index: -1; /* Pushes the overlay BEHIND your text and buttons */
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      z-index: 3;
+      background: rgba(255,255,255,0.95) !important;
+      backdrop-filter: blur(5px);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: #222;
+    }
+
+    .nav-link {
+      color: #444 !important;
+      margin-right: 10px;
+      font-weight: 500;
+    }
+
+    .nav-link:hover {
+      color: #d96b3c !important;
+    }
+
+    /* HEADER CARD */
+    .header-card {
+      background: rgba(255,255,255,0.96);
+      border-radius: 18px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      margin-top: 20px;
+    }
+
+    .header-card h1 {
+      font-weight: 700;
+      margin: 0;
+      color: #333;
+    }
+
+    .header-card p {
+      margin-top: 10px;
+      color: #666;
+      font-size: 17px;
+    }
+
+    /* BUTTONS */
+    .btn-orange {
+      background: #d96b3c;
+      color: white;
+      border: none;
+      font-weight: 600;
+      padding: 10px 18px;
+    }
+
+    .btn-orange:hover {
+      background: #c45d30;
+      color: white;
+    }
+
+    .btn-start {
+      background: #f27044;
+      border: none;
+      color: white;
+      font-weight: 600;
+      padding: 7px 15px;
+    }
+
+    .btn-start:hover {
+      background: #f27044;
+      color: white;
+    }
+
+    /* TABLE CARD */
+    .table-card {
+      background: rgba(255,255,255,0.96);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .table th {
+      color: #444;
+    }
+
+    .table td {
+      vertical-align: middle;
+    }
+
+    .ingredients-title {
+      color: white;
+      font-weight: 700;
+    }
+
+    .status-yes {
+      color: green;
+      font-weight: 600;
+    }
+
+    @media(max-width:768px){
+
+      .header-card {
+        padding: 20px;
+      }
+
+      .header-card h1 {
+        font-size: 32px;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg shadow-sm px-3 fixed-top">
+
+  <div class="container-fluid">
+
+    <!-- LOGO -->
+    <a class="navbar-brand" href="#">
+      🥘 CookWise
+    </a>
+
+    <!-- TOGGLER -->
+    <button class="navbar-toggler" type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav">
+
+      <span class="navbar-toggler-icon"></span>
+
+    </button>
+
+    <!-- MENU -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+      <ul class="navbar-nav me-auto">
+
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'show_recipe' %}">
+            Recipes
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'show_cooking_transactions' %}">
+            Cooking Transactions
+          </a>
+        </li>
+
+      </ul>
+
+      <!-- PROFILE -->
+      <div class="d-flex align-items-center gap-2">
+
+        <span class="fw-semibold">
+          Adrielle Gliane
+        </span>
+
+        <div class="dropdown">
+
+          <button class="btn btn-light dropdown-toggle"
+            data-bs-toggle="dropdown">
+
+            <img
+              src="https://ui-avatars.com/api/?name=Adrielle+Gliane&background=0D8ABC&color=fff&size=30"
+              width="30"
+              class="rounded-circle">
+
+          </button>
+
+          <ul class="dropdown-menu dropdown-menu-end">
+
+            <li>
+              <a class="dropdown-item" href="#">
+                Profile
+              </a>
+            </li>
+
+            <li>
+              <a class="dropdown-item" href="#">
+                Settings
+              </a>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item text-danger" href="#">
+                Logout
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</nav>
+
+<div class="container content" style="padding-top: 100px;">
+
+  <!-- HEADER -->
+  <div class="header-card">
+
+    <h1>
+      Welcome to CookWise 🍳
+    </h1>
+
+    <p>
+      Your smart kitchen companion for managing recipes and cooking transactions.
+    </p>
+
+  </div>
+
+  <!-- TITLE + BUTTON -->
+  <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
+
+    <h4 class="ingredients-title">
+      Ingredients
+    </h4>
+
+    <a href="{% url 'create_ingredient' %}"
+      class="btn btn-orange">
+
+      + Create New Ingredient
+
+    </a>
+
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-card">
+
+    <div class="table-responsive">
+
+      <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Ingredient Name</th>
+                <th>Quantity</th>
+                <th>Unit</th> <th>Price</th>
+                <th>Stock Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ingredient in ingredients %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ ingredient.name }}</td>
+                <td>{{ ingredient.quantity }}</td>
+                
+                <td><span class="badge bg-secondary">{{ ingredient.get_unit_display }}</span></td> 
+                
+                <td>${{ ingredient.price }}</td>
+                <td>{{ ingredient.stock_status }}</td>
+                <td>
+                    <a href="{% url 'edit_ingredients' ingredient.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

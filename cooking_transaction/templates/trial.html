@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home Kitchen Management System</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    /* Global CSS Token Rules matching Code 1, 2 & 5 */
+    :root {
+      --primary-orange: #d96b3c;
+      --hover-orange: #c85d30;
+      --text-dark: #333;
+      --text-muted: #666;
+      --border-radius: 18px;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: url('https://i.pinimg.com/1200x/a5/0a/69/a50a6990e07b1cc241950b1c9967ad19.jpg') center / cover no-repeat fixed;
+      position: relative;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(1.5px);
+      z-index: 1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      flex-grow: 1;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      z-index: 3;
+      background: rgba(255,255,255,0.98) !important;
+      backdrop-filter: blur(5px);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: #222;
+    }
+
+    .nav-link {
+      color: #444 !important;
+      margin-right: 10px;
+      font-weight: 500;
+    }
+
+    .nav-link:hover {
+      color: var(--primary-orange) !important;
+    }
+
+    /* WELCOME HEADER CARD */
+    .header-card {
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 15px;
+      padding: 20px 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .header-card h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: var(--primary-orange);
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .header-card p {
+      margin: 5px 0 0 0;
+      color: var(--text-dark);
+      font-size: 16px;
+    }
+
+    /* CORE COMPONENT CARD BUILD */
+    .polished-card {
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: var(--border-radius);
+      padding: 30px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.2);
+    }
+
+    .card-header-with-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      border-bottom: 2px solid #f0f0f0;
+      padding-bottom: 15px;
+    }
+
+    .card-header-title {
+      font-weight: 700;
+      margin: 0;
+      color: var(--text-dark);
+      font-size: 20px;
+    }
+
+    /* INTERACTIVE ACTION ELEMENTS */
+    .btn-orange {
+      background: var(--primary-orange);
+      color: white;
+      border: none;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .btn-orange:hover {
+      background: var(--hover-orange);
+      color: white;
+    }
+
+    .btn-action {
+      background: white;
+      color: var(--text-dark);
+      border: 1px solid #d9d9d9;
+      font-weight: 600;
+      padding: 7px 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      transition: all 0.2s;
+    }
+
+    .btn-action:hover {
+      background: var(--primary-orange);
+      color: white;
+      border-color: var(--primary-orange);
+    }
+
+    /* THEMED ROW SEPARATION TABLE LAYOUT */
+    .table-responsive {
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    .table {
+      margin-bottom: 0;
+      border-collapse: separate;
+      border-spacing: 0 8px; /* Splits the grid data lines cleanly */
+    }
+
+    .table th {
+      color: var(--text-muted);
+      border: none;
+      background: white;
+      padding-left: 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .table tbody tr {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      transition: transform 0.15s;
+    }
+
+    .table tbody tr:hover {
+      transform: translateY(-1px);
+    }
+
+    .table td {
+      vertical-align: middle;
+      border-top: 1px solid #f0f0f0;
+      border-bottom: 1px solid #f0f0f0;
+      padding: 15px 20px;
+    }
+
+    .table tr td:first-child,
+    .table tr th:first-child {
+      padding-left: 20px;
+      border-left: 1px solid #f0f0f0;
+      border-radius: 10px 0 0 10px;
+    }
+
+    .table tr td:last-child,
+    .table tr th:last-child {
+      padding-right: 20px;
+      border-right: 1px solid #f0f0f0;
+      border-radius: 0 10px 10px 0;
+    }
+
+    @media(max-width:768px){
+      .card-header-with-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .btn-orange {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head> 
+
+<body>
+
+  <nav class="navbar navbar-expand-lg shadow-sm px-3 fixed-top">
+    <div class="container-fluid">
+      
+      <a class="navbar-brand" href="#">
+        <span style="color: var(--primary-orange)">#️⃣</span> CookWise
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'show_recipe' %}">Recipes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'show_cooking_transactions' %}">Cooking Transactions</a>
+          </li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <span class="fw-semibold">Adrielle Gliane</span>
+          <div class="dropdown">
+            <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+              <img src="https://ui-avatars.com/api/?name=Adrielle+Gliane&background=0D8ABC&color=fff&size=30" width="30" class="rounded-circle">
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" href="#">Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <div class="container content" style="padding-top: 100px; padding-bottom: 40px;">
+
+    <div class="header-card">
+      <h1>Welcome to CookWise 🍳</h1>
+      <p>Your smart kitchen companion for managing recipes and cooking transactions.</p>
+    </div>
+
+    <div class="polished-card">
+      
+      <div class="card-header-with-actions">
+        <h3 class="card-header-title">Cooking Transactions</h3>
+        <a href="{% url 'create_cooking_transaction' %}" class="btn btn-orange">
+          <i class="bi bi-plus-lg me-1"></i> New Cooking Transaction
+        </a>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <thead>
+            <tr>
+              <th>Date Cooked</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for cooking_transaction in cooking_transactions %}  
+              <tr>  
+                <td class="fw-semibold text-muted">
+                  <i class="bi bi-clock-history me-2 text-warning"></i> {{ cooking_transaction.date_cooked }}
+                </td>    
+                <td class="text-end">  
+                  <a href="{% url 'edit_cooking_transaction' id=cooking_transaction.id %}" class="btn btn-action btn-sm">
+                    <i class="bi bi-pencil-square me-1"></i> Edit Cooking Transaction
+                  </a> 
+                </td>  
+              </tr>  
+            {% empty %}
+              <tr>
+                <td colspan="2" class="text-center text-muted py-4">No records found. Start cooking to create a transaction entry!</td>
+              </tr>
+            {% endfor %}  
+          </tbody>  
+        </table> 
+      </div>
+
+    </div>
+  </div> 
+
+</body>
+</html>
