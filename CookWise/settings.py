@@ -36,7 +36,7 @@ SECRET_KEY = 'django-insecure-&f(s*t98um!ez@ns0*87wc!q(vxd6=ee$f=mo^=s5%t=_2f@$z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['cookwise-rivl.onrender.com']
+ALLOWED_HOSTS = ['cookwise-rivl.onrender.com', '127.0.0.1', 'localhost']
 
 
 # Application definition

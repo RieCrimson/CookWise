@@ -323,7 +323,8 @@
                             <thead>
                                 <tr>  
                                     <th>Ingredient Name</th>   
-                                    <th>Quantity</th>   
+                                    <th>Quantity</th> 
+                                    <th>Unit</th>  
                                     <th>Stock Status</th>  
                                 </tr>  
                             </thead>
@@ -331,7 +332,8 @@
                                 {% for ingredient in ingredients %}  
                                     <tr>  
                                         <td class="fw-semibold">{{ ingredient.name }}</td>  
-                                        <td>{{ ingredient.quantity }}</td>  
+                                        <td>{{ ingredient.quantity }}</td>
+                                        <td>{{ ingredient.unit }}</td> 
                                         <td>
                                             {% if ingredient.stock_status %}
                                                 <span class="text-success fw-semibold"><i class="bi bi-boxes me-1"></i> In Stock</span>
